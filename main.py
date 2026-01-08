@@ -11,33 +11,29 @@ def root(message: str = "hello") :
     print("GET - / 요정 받았다!")
     return {
         "message": message,
-        "message length": len(message)
+        "message length": len(message),
+        "status": "200 OK"
     }
 
+# 서버에서 사칙연산 계산기 구현
+# PathParam으로 /연산자/항1/항2
+# 우아한 URL
+@app.get("/plus/{a}/{b}")
+def plus(a:int, b:int) :
+    print("더하기 결과=>", a, b, a+b)
+    return a + b
 
-# BasesModel을 상속받아서 Message클래스 선언
-from pydantic import BaseModel
+@app.get("/min/{a}/{b}")
+def plus(a:int, b:int) :
+    print("빼기 결과=>", a, b, a-b)
+    return a - b
 
-# 클라이언트에서 Ajax로 통신할때 JSON 데이터
-# POST로 통신 할때는 JSON으로 데이터 전송
-class Message(BaseModel):
-    text: str
+@app.get("/mult/{a}/{b}")
+def plus(a:int, b:int) :
+    print("곱하기 결과=>", a, b, a*b)
+    return a * b
 
-# post 메서드를 추가하고 postman으로 테스트 하기
-# Content-Type: raw로 설정 후 JSON 데이터 전송
-@app.post("/")
-def root_post(message: Message) :
-    print("POST - / 요정 받았다!")
-    return {
-        "message": message.text,
-        "message length": len(message.text)
-    }
-
-
-# Form 파라미터 전달 받기
-@app.post("/login")
-def login_post(username: str = Form(...)):
-    print("POST - /login 요정 받았다!")
-    return {
-        "username": username
-    }
+@app.get("/div/{a}/{b}")
+def plus(a:int, b:int) :
+    print("나누기 결과=>", a, b, a/b)
+    return a / b

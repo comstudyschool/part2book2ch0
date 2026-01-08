@@ -6,39 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Ajax란?</h1>
-    
-<script>
-    console.log("Hello javascript world");
+    <h1>초등학교 저학년 사칙연산 계산기</h1>
+    항1: <input type="text" id="a" value="10"><br>
+    항2: <input type="text" id="b" value="3"><br>
+    연산자: <select id="oper">
+        <option value="plus">+</option>
+        <option value="min">-</option>
+        <option value="mult">*</option>
+        <option value="div">/</option>
+    </select>
+    <button id="btn">확인</button>
+    <div>결과: </div>
+    <script>
+        // btn을 클릭하면 항1, 항2의 값을 서버에 전송하고 그 결과를 돌려 받기
+        var inputA = document.getElementById("a");
+        var inputB = document.getElementById("b");
+        var selectOper = document.getElementById("oper");
+        var buttonBtn = document.getElementById("btn");
 
-    var BASE_URL = "http://127.0.0.1:8000";
+        buttonBtn.onclick = function(event) {
+            var a = inputA.value;
+            var b = inputB.value;
+            var oper = selectOper.value;
+            console.log("버튼 눌렀다!",a,b,oper);
 
-    // Ajax를 가능하게 하는 객체 생성
-    var xhr = new XMLHttpRequest();
-    console.dir(xhr);
-
-    // 후속으로 결과를 처리하는 함수
-    xhr.onload = function(event) {
-        // console.log(event);
-        console.log(xhr.responseText);
-    }
-
-    // 요청 할 타겟을 지정
-    xhr.open("POST", BASE_URL+"/", true)
-
-    // 중요: JSON 데이터 전송
-    // open() 함수 아래에 위치 해야 한다. 
-    xhr.setRequestHeader("Content-type", "application/json");
-
-    // JSON 데이터로 변경 할 Object(객체) 준비
-    dataObj = {
-        text: "Hello FastAPI Server"
-    }
-
-    // 실행하라는 신호
-    // 자바스크립트 객체를 JSON문자열로 변환 후 전송
-    xhr.send(JSON.stringify(dataObj) )
-
-</script>
+            // 오늘 배운 Ajax를 이용해서 FastAPI 서버와 통신 되는 기능 구현.
+        }
+    </script>
 </body>
 </html>
