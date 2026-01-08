@@ -24,20 +24,14 @@
     }
 
     // 요청 할 타겟을 지정
-    xhr.open("POST", BASE_URL+"/", true)
+    xhr.open("POST", BASE_URL+"/login", true)
 
-    // 중요: JSON 데이터 전송
+    // 중요: to POST Data like an HTML From
     // open() 함수 아래에 위치 해야 한다. 
-    xhr.setRequestHeader("Content-type", "application/json");
-
-    // JSON 데이터로 변경 할 Object(객체) 준비
-    dataObj = {
-        text: "Hello FastAPI Server"
-    }
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     // 실행하라는 신호
-    // 자바스크립트 객체를 JSON문자열로 변환 후 전송
-    xhr.send(JSON.stringify(dataObj) )
+    xhr.send("username=kimGildong")
 
 </script>
 </body>

@@ -3,12 +3,12 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-
-# public 폴더를 정적 파일 경로로 등록
+# public 폴더를 정적 파일 경로로 등록(mount)
 app.mount("/public", StaticFiles(directory="public", html=True), name="public")
 
 @app.get("/")
 def root(message: str = "hello") :
+    print("GET - / 요정 받았다!")
     return {
         "message": message,
         "message length": len(message)
@@ -27,6 +27,7 @@ class Message(BaseModel):
 # Content-Type: raw로 설정 후 JSON 데이터 전송
 @app.post("/")
 def root_post(message: Message) :
+    print("POST - / 요정 받았다!")
     return {
         "message": message.text,
         "message length": len(message.text)
@@ -36,6 +37,7 @@ def root_post(message: Message) :
 # Form 파라미터 전달 받기
 @app.post("/login")
 def login_post(username: str = Form(...)):
+    print("POST - /login 요정 받았다!")
     return {
         "username": username
     }
